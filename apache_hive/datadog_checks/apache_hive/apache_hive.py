@@ -38,7 +38,7 @@ class apache_hive(AgentCheck):
         else:
           self.log.info(metricname+' is empty!')
           return
-   def httpRequest(self,url):
+    def httpRequest(self,url):
        aggregation_key = md5(url).hexdigest()
        try:
          r = requests.get(url, timeout=8)
@@ -50,7 +50,7 @@ class apache_hive(AgentCheck):
          return
        else:
          return r.json()
-   def timeout_event(self, url, timeout, aggregation_key):
+    def timeout_event(self, url, timeout, aggregation_key):
         self.event({
             'timestamp': int(time.time()),
             'event_type': 'http_check',
@@ -59,7 +59,7 @@ class apache_hive(AgentCheck):
             'aggregation_key': aggregation_key
         })
 
-   def status_code_event(self, url, r, aggregation_key):
+    def status_code_event(self, url, r, aggregation_key):
         self.event({
             'timestamp': int(time.time()),
             'event_type': 'http_check',
